@@ -1,0 +1,7 @@
+
+until sudo -su hdfs /usr/hdp/3.1.0.0-78/spark2/bin/spark-submit --jars /usr/hdp/3.1.0.0-78/spark2/jars/elasticsearch-hadoop-7.4.1.jar
+--master yarn --num-executors 1 --class com.abc.tracing.FRM_Process_ProcessNotification /usr/hdp/3.1.0.0-78/spark2/jars/AKAspark.jar 10.11.152.61:9092,10.11.152.62:9092,10.11.152.63:9092 prdvarkafka01.zb:6667,prdvarkafka02.:6667,prdvarkafka03.zb:6667,prdvarkafka04.zb:6667 >> $log 2>&1; do
+    echo "process 'FRM_Process_ProcessNotification' crashed with exit code $?.  Respawning.." >> $log 2>&1
+    sleep 1
+done
+
